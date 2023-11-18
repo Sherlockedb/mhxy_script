@@ -8,7 +8,8 @@ from mhxy_haidi import *
 from mhxy_menpai import *
 from mhxy_mihunta import *
 from mhxy_mine import *
-from mhxy_baotu import *
+from mhxy_use_baotu import *
+from auto_task import *
 
 _backgroundThread = None
 _curScript = None
@@ -106,7 +107,7 @@ def packBangpai():
 
 def packBaotu():
     def change2Baotu():
-        changeThread(Baotu(changWinPos=_changWinPos))
+        changeThread(UseBaotu(changWinPos=_changWinPos))
 
     mineBtn = myButton(root, text='一键挖宝图', width=8, command=change2Baotu)
     mineBtn.place(x=40, y=230, anchor=NW)
@@ -118,13 +119,17 @@ def packMine():
     mineBtn = myButton(root, text='挖矿', width=8, command=change2Mine)
     mineBtn.place(x=130, y=230, anchor=NW)
 
+def packAutoTask():
+    mineBtn = myButton(root, text='自动任务', width=8, command=auto_do_task)
+    mineBtn.place(x=40, y=270, anchor=NW)
+
 # 界面程序 此部分封装了参数没有大量写死的程序 opencv 死活打包不进去
 # pyinstaller --onefile --noconsole mhxy_script.py
 # pyinstaller --onefile mhxy_script.py
 if __name__ == '__main__':
     root = Tk()
     root.title("mhxy_script")
-    root.geometry('260x430')
+    root.geometry('260x480')
     x = int((root.winfo_screenwidth() - root.winfo_reqwidth()) / 2)
     y = int((root.winfo_screenheight() - root.winfo_reqheight()) / 2)
     # 将窗口居中显示
@@ -158,6 +163,9 @@ if __name__ == '__main__':
     # 挖矿
     packMine()
 
+    # 自动任务
+    packAutoTask()
+
     #  Label
     t = Text(root, width=32, height=10)
     t.insert(END, "说明\n"
@@ -165,7 +173,7 @@ if __name__ == '__main__':
                   "2 程序不受控可以通过将鼠标快速移动到右上角强制终止。\n"
                   "3 对应功能程序配置文件和说明放在resources下相应文件夹内\n"
              )
-    t.place(x=10, y=270, anchor=NW)
+    t.place(x=10, y=320, anchor=NW)
 
     packStop()
     root.mainloop()
