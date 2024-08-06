@@ -4,12 +4,12 @@ class UseBaotu(MhxyScript):
 
     def find_baotu(self):
         for _ in range(0, 3):
-            pyautogui.moveTo(winRelativeX(17.3), winRelativeY(13))
-            pyautogui.dragTo(winRelativeX(17.3), winRelativeY(6), duration=0.8)
             baotuLocation = Util.locateOnScreen('resources/use_baotu/baotu_item.png')
             if baotuLocation is not None:
                 return baotuLocation
             cooldown(2)
+            pyautogui.moveTo(winRelativeX(17.3), winRelativeY(13))
+            pyautogui.dragTo(winRelativeX(17.3), winRelativeY(6), duration=0.8)
 
     def run_baotu(self):
         Util.leftClick(23, 16)

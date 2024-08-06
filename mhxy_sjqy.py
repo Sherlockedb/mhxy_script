@@ -13,9 +13,7 @@ class Sjqy(MhxyScript):
 
 
     def run_sjqy(self):
-        Util.leftClick(7.5, 1.5)
-        cooldown(1)
-        Util.leftClick(3, 4.5)
+        self.open_huodong()
         cooldown(1)
 
         sjqyLocation = self.find_sjqy()
@@ -36,6 +34,7 @@ class Sjqy(MhxyScript):
         if self.run_sjqy() is False:
             return
         while self._flag:
+            self.use_item()
             sjqyLocation = Util.locateCenterOnScreen('resources/sjqy/sjqy_qiuzhu.png')
             print(f"===== sjqyLocation:{sjqyLocation}")
             if sjqyLocation is not None:

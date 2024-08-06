@@ -13,9 +13,7 @@ class Shimen(MhxyScript):
 
 
     def run_shimen(self):
-        Util.leftClick(7.5, 1.5)
-        cooldown(0.5)
-        Util.leftClick(3, 4.5)
+        self.open_huodong()
         cooldown(1)
 
         shimenLocation = self.find_shimen()

@@ -5,6 +5,8 @@ from mhxy_sjqy import *
 from mhxy_clear_ui import *
 from mhxy_keju import *
 from mhxy_bangpai2 import *
+from mhxy_mjxy import *
+
 
 def auto_do_task():
     clear_ui = ClearUI()
@@ -13,16 +15,19 @@ def auto_do_task():
     Shimen().do()
 
     clear_ui.do()
+    Mjxy().do()
+
+    clear_ui.do()
     Baotu().do()
 
     clear_ui.do()
     Sjqy().do()
 
     clear_ui.do()
-    Yunbiao().do()
+    Keju().do()
 
     clear_ui.do()
-    Keju().do()
+    Yunbiao().do()
 
 
 if __name__ == '__main__':

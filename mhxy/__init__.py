@@ -377,6 +377,7 @@ class MhxyScriptInterrupt(Exception):
     pass
 
 class MhxyScript:
+
     # 程序运行标志
     _flag = True
 
@@ -391,3 +392,37 @@ class MhxyScript:
 
     def do(self):
         pass
+
+    def open_huodong(self):
+        for _ in range(0, 10):
+            # pyautogui.hotkey('alt', 'c')
+            Util.leftClick(7.5, 1.5)
+            cooldown(2)
+            baotuLocation = Util.locateCenterOnScreen('resources/common/activity.png')
+            print(f"===== open_huodong:{baotuLocation}")
+            if baotuLocation is not None:
+                Util.leftClick(3, 6.3)
+                cooldown(1)
+                Util.leftClick(3, 4.5)
+                return True
+
+        return False
+    
+    def use_item(self):
+        for _ in range(0, 5):
+            itemLocation = Util.locateCenterOnScreen('resources/common/use_item.png')
+            if itemLocation is None:
+                return
+            
+            print(f"===== use_item:{itemLocation}")
+            pyautogui.leftClick(itemLocation.x, itemLocation.y)
+            cooldown(1)
+
+    def close_item(self):
+        for _ in range(0, 5):
+            itemLocation = Util.locateCenterOnScreen('resources/common/close_item.png')
+            if itemLocation is None:
+                return
+            
+            pyautogui.leftClick(itemLocation.x, itemLocation.y)
+            cooldown(1)

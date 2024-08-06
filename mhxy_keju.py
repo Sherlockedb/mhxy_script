@@ -13,9 +13,7 @@ class Keju(MhxyScript):
 
 
     def run_keju(self):
-        Util.leftClick(7.5, 1.5)
-        cooldown(1)
-        Util.leftClick(3, 4.5)
+        self.open_huodong()
         cooldown(1)
 
         kejuLocation = self.find_keju()

@@ -1,7 +1,8 @@
 from tkinter import *
 
 from game_process import *
-from mhxy_bangpai2 import *
+# from mhxy_bangpai2 import *
+from mhxy_auto_bangpai import *
 from mhxy_fuben import *
 from mhxy_ghost import *
 from mhxy_haidi import *
@@ -100,7 +101,8 @@ def packBangpai():
     global bangpaiBtn
 
     def change2bangpai():
-        changeThread(Bangpai(changWinPos=_changWinPos))
+        # changeThread(Bangpai(changWinPos=_changWinPos))
+        changeThread(AutoBangpai())
 
     bangpaiBtn = myButton(root, text='帮派任务', width=8, command=change2bangpai)
     bangpaiBtn.place(x=130, y=140, anchor=NW)

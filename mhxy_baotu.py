@@ -11,20 +11,8 @@ class Baotu(MhxyScript):
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
             pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
 
-    def open_huodong(self):
-        for i in range(0, 10):
-            pyautogui.hotkey('alt', 'c')
-            cooldown(1)
-            print(f"===== try open huodong i:{i}")
-            baotuLocation = Util.locateCenterOnScreen('resources/baotu/activity.png')
-            if baotuLocation is not None:
-                break
-
     def run_baotu(self, check_do=True):
         self.open_huodong()
-        # cooldown(0.5)
-        # pyautogui.hotkey('alt', 'c')
-        # Util.leftClick(7.5, 1.5)
         cooldown(1)
         Util.leftClick(3, 4.5)
         cooldown(1)
