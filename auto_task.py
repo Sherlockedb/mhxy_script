@@ -1,3 +1,5 @@
+from mhxy import *
+
 from mhxy_baotu import *
 from mhxy_yunbiao import *
 from mhxy_shimen import *
@@ -8,27 +10,21 @@ from mhxy_bangpai2 import *
 from mhxy_mjxy import *
 
 
-def auto_do_task():
-    clear_ui = ClearUI()
+class AutoTask(MhxyScript):
 
-    clear_ui.do()
-    Shimen().do()
+    def do(self):
+        task_cls = [Shimen, Mjxy, Baotu, Sjqy, Keju, Yunbiao]
+        clear_ui = ClearUI()
 
-    clear_ui.do()
-    Mjxy().do()
-
-    clear_ui.do()
-    Baotu().do()
-
-    clear_ui.do()
-    Sjqy().do()
-
-    clear_ui.do()
-    Keju().do()
-
-    clear_ui.do()
-    Yunbiao().do()
+        for cls in task_cls:
+            if not self._flag:
+                break
+            clear_ui.do()
+            print("开始任务：", cls)
+            task = cls()
+            task._flag = self._flag
+            task.do()
 
 
 if __name__ == '__main__':
-    auto_do_task()
+    AutoTask.do()

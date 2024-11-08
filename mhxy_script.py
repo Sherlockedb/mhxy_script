@@ -11,6 +11,8 @@ from mhxy_mihunta import *
 from mhxy_mine import *
 from mhxy_use_baotu import *
 from auto_task import *
+from check_location import *
+from mhxy_auto_fight import *
 
 _backgroundThread = None
 _curScript = None
@@ -122,8 +124,25 @@ def packMine():
     mineBtn.place(x=130, y=230, anchor=NW)
 
 def packAutoTask():
-    mineBtn = myButton(root, text='自动任务', width=8, command=auto_do_task)
+    def change2AutoTask():
+        changeThread(AutoTask())
+
+    mineBtn = myButton(root, text='日常任务', width=8, command=change2AutoTask)
     mineBtn.place(x=40, y=270, anchor=NW)
+
+def packCheckLoaction():
+    def change2CheckLocation():
+        changeThread(CheckLoaction())
+
+    mineBtn = myButton(root, text='检查位置', width=8, command=change2CheckLocation)
+    mineBtn.place(x=130, y=270, anchor=NW)
+
+def packAutoFight():
+    def change2AutoFight():
+        changeThread(AutoFight())
+
+    mineBtn = myButton(root, text='自动战斗', width=8, command=change2AutoFight)
+    mineBtn.place(x=40, y=310, anchor=NW)
 
 # 界面程序 此部分封装了参数没有大量写死的程序 opencv 死活打包不进去
 # pyinstaller --onefile --noconsole mhxy_script.py
@@ -131,7 +150,7 @@ def packAutoTask():
 if __name__ == '__main__':
     root = Tk()
     root.title("mhxy_script")
-    root.geometry('260x480')
+    root.geometry('260x540')
     x = int((root.winfo_screenwidth() - root.winfo_reqwidth()) / 2)
     y = int((root.winfo_screenheight() - root.winfo_reqheight()) / 2)
     # 将窗口居中显示
@@ -168,6 +187,12 @@ if __name__ == '__main__':
     # 自动任务
     packAutoTask()
 
+    # 检查位置
+    packCheckLoaction()
+
+    # 自动战斗
+    packAutoFight()
+
     #  Label
     t = Text(root, width=32, height=10)
     t.insert(END, "说明\n"
@@ -175,7 +200,7 @@ if __name__ == '__main__':
                   "2 程序不受控可以通过将鼠标快速移动到右上角强制终止。\n"
                   "3 对应功能程序配置文件和说明放在resources下相应文件夹内\n"
              )
-    t.place(x=10, y=320, anchor=NW)
+    t.place(x=10, y=360, anchor=NW)
 
     packStop()
     root.mainloop()
