@@ -393,8 +393,16 @@ class MhxyScript:
     def do(self):
         pass
 
-    def open_huodong(self):
-        for _ in range(0, 10):
+    def _open_huodong(self):
+        huodongLocation = Util.locateCenterOnScreen('resources/common/huodong.png')
+        print(f"===== _open_huodong:{huodongLocation}")
+        if huodongLocation is not None:
+            pyautogui.leftClick(huodongLocation.x, huodongLocation.y)
+
+    def open_huodong(self, n=10):
+        for _ in range(0, n):
+            if not self._flag:
+                return
             # pyautogui.hotkey('alt', 'c')
             Util.leftClick(7.5, 1.5)
             cooldown(2)
@@ -408,8 +416,23 @@ class MhxyScript:
 
         return False
     
+    _item_black_list = ['resources/common/shengjing_key.png',
+                        'resources/common/xingchen_suipian.png']
+
+    def _check_black_item(self):
+        for item in self._item_black_list:
+            itemLocation = Util.locateCenterOnScreen(item)
+            if itemLocation is None:
+                continue
+
+            closeLocation = Util.locateCenterOnScreen('resources/common/close_item.png')
+            print(f"===== close_black_item:{closeLocation}")
+            pyautogui.leftClick(closeLocation.x, closeLocation.y)
+            cooldown(1)
+
     def use_item(self):
         for _ in range(0, 5):
+            self._check_black_item()
             itemLocation = Util.locateCenterOnScreen('resources/common/use_item.png')
             if itemLocation is None:
                 return
