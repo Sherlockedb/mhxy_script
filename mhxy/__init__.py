@@ -39,7 +39,7 @@ frame = Frame(0, 0)
 originSize = [1040, 807]
 smallSize = (907, 707)
 # 鼠标到变化态需要向做微调距离
-resizeOffset = (10, 7)
+resizeOffset = (6, 4)
 frameSize = [0, 0]
 
 frameOriginSizeCm = [28.1, 21.8]
