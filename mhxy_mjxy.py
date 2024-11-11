@@ -37,6 +37,10 @@ class Mjxy(MhxyScript):
                                     mjxyOpt.top + mjxyOpt.height - 20)
                 cooldown(2)
 
+                mjxy_stage = Util.locateOnScreen('resources/mjxy/mjxy_stage.png')
+                if mjxy_stage is None:
+                    continue
+
                 mjxyYcxz = Util.locateCenterOnScreen('resources/mjxy/mjxy_ycxz.png')
                 if mjxyYcxz is None:
                     mjxyYcxz = Util.locateCenterOnScreen('resources/mjxy/mjxy_hdmj.png')
@@ -50,12 +54,15 @@ class Mjxy(MhxyScript):
                         cooldown(2)
 
                 mjxy_challenge = Util.locateOnScreen('resources/mjxy/mjxy_challenge.png')
-                if mjxy_challenge is not None:
-                    pyautogui.leftClick(mjxy_challenge.left + mjxy_challenge.width - 50,
-                                        mjxy_challenge.top + mjxy_challenge.height - 20)
-                    print("进入秘境", mjxyLocation)
-                    cooldown(2)
-                    return True
+                if mjxy_challenge is None:
+                    print("已完成秘境挑战")
+                    return False
+
+                pyautogui.leftClick(mjxy_challenge.left + mjxy_challenge.width - 50,
+                                    mjxy_challenge.top + mjxy_challenge.height - 20)
+                print("进入秘境", mjxyLocation)
+                cooldown(2)
+                return True
 
 
         return False
