@@ -30,7 +30,7 @@ class GameProcess:
 
     def moveZhuomianban2Origin(self):
         windows = pyautogui.getAllWindows()
-        item = list(filter(lambda x: x.title.startswith("梦幻西游"), windows))[0]
+        item = list(filter(lambda x: x.title.startswith("MuMu模拟器12"), windows))[0]
         item.activate()
         print(item)
         pyautogui.moveTo(item.right - resizeOffset[0], item.bottom - resizeOffset[1])

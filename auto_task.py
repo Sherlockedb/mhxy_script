@@ -24,6 +24,9 @@ class AutoTask(MhxyScript):
             task = cls()
             task._flag = self._flag
             task.do()
+            print("完成任务：", cls)
+
+        print("全部任务已经完成")
 
 
 if __name__ == '__main__':

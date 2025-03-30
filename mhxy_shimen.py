@@ -57,9 +57,18 @@ class Shimen(MhxyScript):
             if shimenLocation is not None:
                 return
             cooldown(10)
-            shimenTaskLocation = Util.locateCenterOnScreen('resources/shimen/shimen_task.png')
-            if shimenTaskLocation is not None:
-                pyautogui.leftClick(shimenTaskLocation.x, shimenTaskLocation.y)
+            shimenTaskLocation2 = Util.locateCenterOnScreen('resources/shimen/shimen_task2.png')
+            if shimenTaskLocation2 is not None:
+                continueLocation = Util.locateCenterOnScreen('resources/shimen/shimen_continue_after.png');
+                if continueLocation is None:
+                    pyautogui.leftClick(shimenTaskLocation2.x, shimenTaskLocation2.y)
+                    cooldown(2)
+                    pyautogui.leftClick(shimenTaskLocation2.x, shimenTaskLocation2.y)
+            # shimenTaskLocation = Util.locateCenterOnScreen('resources/shimen/shimen_task.png')
+            # if shimenTaskLocation is not None:
+            #     continueLocation = Util.locateCenterOnScreen('resources/shimen/shimen_continue_after.png');
+            #     if continueLocation is None:
+            #         pyautogui.leftClick(shimenTaskLocation.x, shimenTaskLocation.y)
             cooldown(20)
             i += 1
             if i % 10 == 0: # 5分钟没师门了，再检测一下

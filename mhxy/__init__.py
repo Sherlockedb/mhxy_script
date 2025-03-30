@@ -417,7 +417,9 @@ class MhxyScript:
         return False
     
     _item_black_list = ['resources/common/shengjing_key.png',
-                        'resources/common/xingchen_suipian.png']
+                        'resources/common/xingchen_suipian.png',
+                        'resources/common/jingcaiquan.png',
+                        ]
 
     def _check_black_item(self):
         for item in self._item_black_list:
