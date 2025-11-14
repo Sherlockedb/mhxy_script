@@ -9,7 +9,7 @@ class Keju(MhxyScript):
                 return kejuLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
 
 
     def run_keju(self):
@@ -21,7 +21,7 @@ class Keju(MhxyScript):
         print(f"===== run keju keju location:{kejuLocation}")
         if kejuLocation is None:
             return False
-        pyautogui.leftClick(kejuLocation.x + relativeX2Act(4), kejuLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(kejuLocation.x + relativeX2Act(3), kejuLocation.y + relativeY2Act(0.3))
 
         kejuDone = Util.locateOnScreen('resources/keju/keju_done.png')
         print(f"===== run keju keju done location:{kejuDone}")
@@ -37,7 +37,7 @@ class Keju(MhxyScript):
             kejuLocation = Util.locateCenterOnScreen('resources/keju/keju_qiuzhu.png')
             print(f"===== kejuLocation:{kejuLocation}")
             if kejuLocation is not None:
-                pyautogui.leftClick(kejuLocation.x, kejuLocation.y - relativeY2Act(5))
+                pyautogui.leftClick(kejuLocation.x, kejuLocation.y - relativeY2Act(3))
                 # pyautogui.leftClick(kejuLocation.left + kejuLocation.width - 50,
                 #                     kejuLocation.top + kejuLocation.height - 20)
                 print("开始答题", kejuLocation)

@@ -9,7 +9,7 @@ class Mjxy(MhxyScript):
                 return mjxyLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
 
 
     def run_mjxy(self):
@@ -21,7 +21,7 @@ class Mjxy(MhxyScript):
         print(f"===== run mjxy mjxy location:{mjxyLocation}")
         if mjxyLocation is None:
             return False
-        pyautogui.leftClick(mjxyLocation.x + relativeX2Act(4), mjxyLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(mjxyLocation.x + relativeX2Act(3), mjxyLocation.y + relativeY2Act(0.3))
 
         mjxyDone = Util.locateOnScreen('resources/mjxy/mjxy_done.png')
         print(f"===== run mjxy mjxy done location:{mjxyDone}")
@@ -41,7 +41,7 @@ class Mjxy(MhxyScript):
                 if mjxyYcxz is None:
                     mjxyYcxz = Util.locateCenterOnScreen('resources/mjxy/mjxy_hdmj.png')
                 if mjxyYcxz is not None:
-                    pyautogui.leftClick(mjxyYcxz.x, mjxyYcxz.y + relativeY2Act(10))
+                    pyautogui.leftClick(mjxyYcxz.x, mjxyYcxz.y + relativeY2Act(8))
                     cooldown(2)
                     mjxyConfirm = Util.locateCenterOnScreen('resources/mjxy/mjxy_confirm.png')
                     if mjxyConfirm is not None:

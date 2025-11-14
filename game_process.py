@@ -18,10 +18,10 @@ class GameProcess:
                 print("notSafe")
             pyautogui.moveTo(item.right - resizeOffset[0], item.bottom - resizeOffset[1])
             pyautogui.dragTo(item.left + (size[0] - resizeOffset[0]), item.top + (size[1] - resizeOffset[1]),
-                             duration=1)
+                             duration=1, button='left')
             pyautogui.moveTo(item.left + self._moveOffset[0], item.top + self._moveOffset[1])
             cooldown(1)
-            pyautogui.dragTo(zhuomianban[i] + self._moveOffset[0], 0 + self._moveOffset[1], duration=1)
+            pyautogui.dragTo(zhuomianban[i] + self._moveOffset[0], 0 + self._moveOffset[1], duration=1, button='left')
             i += 1
             print("处理后：", item)
 
@@ -35,7 +35,7 @@ class GameProcess:
         print(item)
         pyautogui.moveTo(item.right - resizeOffset[0], item.bottom - resizeOffset[1])
         pyautogui.dragTo(item.left + (originSize[0] - resizeOffset[0]), item.top + (originSize[1] - resizeOffset[1]),
-                         duration=1)
+                         duration=1, button='left')
         cooldown(3)
         print("处理后：", item)
 
@@ -52,7 +52,7 @@ class GameProcess:
                 print("notSafe")
             pyautogui.moveTo(item.right - 5, item.top + 15)
             pyautogui.dragTo(item.left + (size[0] - 5), item.top + 15,
-                             duration=1)
+                             duration=1, button='left')
             i += 1
             print("处理后：", item)
 

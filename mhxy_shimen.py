@@ -9,7 +9,7 @@ class Shimen(MhxyScript):
                 return shimenLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
 
 
     def run_shimen(self):
@@ -21,7 +21,7 @@ class Shimen(MhxyScript):
         print(f"===== run shimen shimen location:{shimenLocation}")
         if shimenLocation is None:
             return False
-        pyautogui.leftClick(shimenLocation.x + relativeX2Act(4), shimenLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(shimenLocation.x + relativeX2Act(3), shimenLocation.y + relativeY2Act(0.3))
 
         shimenDone = Util.locateOnScreen('resources/shimen/shimen_done.png')
         print(f"===== run shimen shimen done location:{shimenDone}")

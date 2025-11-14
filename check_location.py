@@ -5,7 +5,7 @@ from game_process import *
 class CheckLoaction(MhxyScript):
 
     def do(self):
-        self.open_huodong(1)
+        self.open_huodong()
 
 
 if __name__ == '__main__':

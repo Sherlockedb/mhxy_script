@@ -90,7 +90,7 @@ class Shopping:
         cooldown(0.3)
         for i in range(0, 3):
             pyautogui.moveTo(winRelativeX(5), winRelativeY(17))
-            pyautogui.dragTo(winRelativeX(5), winRelativeY(9), duration=1)
+            pyautogui.dragTo(winRelativeX(5), winRelativeY(9), duration=1, button='left')
             cooldown(0.3)
         fabao = Util.locateCenterOnScreen("resources/shop/category.png")
         if fabao is not None:

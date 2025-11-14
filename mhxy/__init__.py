@@ -5,9 +5,36 @@ import threading
 import time
 
 import playsound as pl
+import pywinctl as pwc
 import pyautogui
 import pyperclip
 from pygetwindow import PyGetWindowException, BaseWindow
+# from pyautogui import Point
+from pyscreeze import Box, Point
+
+'''
+# ====== Monkey Patch =======
+import mss
+from PIL import Image
+
+_original_screenshot = pyautogui.screenshot
+
+def _mss_screenshot(imageFilename=None, region=None):
+    with mss.mss() as sct:
+        monitor = sct.monitors[0] if region is None else {
+            "left": region[0], "top": region[1],
+            "width": region[2], "height": region[3]
+        }
+        sct_img = sct.grab(monitor)
+        img = Image.frombytes("RGB", sct_img.size, sct_img.bgra, "raw", "BGRX")
+        if imageFilename:
+            img.save(imageFilename)
+        return img
+
+pyautogui.screenshot = _mss_screenshot
+import pyscreeze
+pyscreeze.screenshot = _mss_screenshot
+'''
 
 logger = logging.getLogger('mylogger')
 logger.setLevel(logging.DEBUG)
@@ -36,14 +63,14 @@ class Frame:
 frame = Frame(0, 0)
 
 # 窗口固定大小
-originSize = [1040, 807]
-smallSize = (907, 707)
+originSize = [1051, 816]
+smallSize = (1051, 816)
 # 鼠标到变化态需要向做微调距离
 resizeOffset = (10, 7)
 frameSize = [0, 0]
 
-frameOriginSizeCm = [28.1, 21.8]
-frameSizeCm = [28.1, 21.8]
+frameOriginSizeCm = [20.8, 16.1]
+frameSizeCm = [20.8, 16.1]
 
 def relativeSize(x, y):
     return (frameSize[0] * x / frameSizeCm[0],
@@ -215,29 +242,38 @@ class Util:
         if isinstance(pic, list):
             res = None
             for i in pic:
+                region=(frame.left, frame.top, (frame.right - frame.left)*2, (frame.bottom - frame.top)*2)
                 if cfd is not None:
-                    res = pyautogui.locateCenterOnScreen(i, region=(frame.left, frame.top, frame.right, frame.bottom),
-                                                         confidence=cfd)
+                    res = pyautogui.locateCenterOnScreen(i, region=region, confidence=cfd)
                 else:
-                    res = pyautogui.locateCenterOnScreen(i, region=(frame.left, frame.top, frame.right, frame.bottom))
+                    res = pyautogui.locateCenterOnScreen(i, region=region)
                 if res is not None:
+                    res = Point(res.x/2, res.y/2)
                     return res
             return res
         else:
+            region=(frame.left, frame.top, (frame.right - frame.left)*2, (frame.bottom - frame.top)*2)
+            point = None
             if cfd is not None:
-                return pyautogui.locateCenterOnScreen(pic, region=(frame.left, frame.top, frame.right, frame.bottom),
-                                                      confidence=cfd)
+                point = pyautogui.locateCenterOnScreen(pic, region=region, confidence=cfd)
             else:
-                return pyautogui.locateCenterOnScreen(pic,
-                                                      region=(frame.left, frame.top, frame.right, frame.bottom))
+                point = pyautogui.locateCenterOnScreen(pic, region=region)
+            if point:
+                point = Point(point.x/2, point.y/2)
+            return point
 
     @staticmethod
     def locateOnScreen(pic, confidence=0.9):
         cfd = confidence if Util.__openCVEnable() else None
+        region=(frame.left, frame.top, (frame.right - frame.left)*2, (frame.bottom - frame.top)*2)
+        box = None
         if cfd is not None:
-            return pyautogui.locateOnScreen(pic, region=(frame.left, frame.top, frame.right, frame.bottom), confidence=cfd)
+            box = pyautogui.locateOnScreen(pic, region=region, confidence=cfd)
         else:
-            return pyautogui.locateOnScreen(pic, region=(frame.left, frame.top, frame.right, frame.bottom))
+            box = pyautogui.locateOnScreen(pic, region=region)
+        if box:
+            box = Box(box.left/2, box.top/2, box.width/2, box.height/2)
+        return box
 
     @staticmethod
     def leftClick(x, y):
@@ -270,7 +306,7 @@ def resize2Small(windows):
         cooldown(1)
     pyautogui.moveTo(windows.right - resizeOffset[0], windows.bottom - resizeOffset[1])
     pyautogui.dragTo(windows.left + (smallSize[0] - resizeOffset[0]), windows.top + (smallSize[1] - resizeOffset[1]),
-                     duration=1.3)
+                     duration=1.3, button='left')
 '''
 @:param resizeToSmall 是否修改窗口为小窗口
 @:param changWinPos 窗口位置是否发生移动
@@ -282,14 +318,15 @@ def init(idx=0, resizeToSmall=False, changWinPos=True):
     def getFrameSize(idx) -> BaseWindow:
         window = None
         while window is None or window.left < 0:
-            windowsList = pyautogui.getWindowsWithTitle('梦幻西游：时空')
+            windowsList = pwc.getWindowsWithTitle('梦幻西游')
+            # windowsList = pwc.getWindowsWithTitle('BlueStacks Air')
             windowsList = list(filter(lambda x: x.left > 0, windowsList))
             windowsList.sort(key=lambda x: x.left)
 
-            moniqiWin = list(filter(lambda x: x.left > 0 and (x.title.startswith("MuMu模拟器12") or x.title.startswith("梦幻西游 - ")), pyautogui.getAllWindows()))
-            moniqiWin.sort(key=lambda x: x.left)
-            for each in moniqiWin:
-                windowsList.append(each)
+            # moniqiWin = list(filter(lambda x: x.left > 0 and (x.title.startswith("MuMu模拟器12") or x.title.startswith("梦幻西游 - ")), pyautogui.getAllWindows()))
+            # moniqiWin.sort(key=lambda x: x.left)
+            # for each in moniqiWin:
+            #     windowsList.append(each)
 
             if len(windowsList) > 0:
                 window = windowsList[idx]
@@ -394,14 +431,14 @@ class MhxyScript:
         pass
 
     def open_huodong(self):
-        for _ in range(0, 10):
+        for _ in range(0, 5):
             # pyautogui.hotkey('alt', 'c')
-            Util.leftClick(7.5, 1.5)
+            Util.leftClick(5.5, 1)
             cooldown(2)
             baotuLocation = Util.locateCenterOnScreen('resources/common/activity.png')
             print(f"===== open_huodong:{baotuLocation}")
             if baotuLocation is not None:
-                Util.leftClick(3, 6.3)
+                Util.leftClick(3, 5.5)
                 cooldown(1)
                 Util.leftClick(3, 4.5)
                 return True

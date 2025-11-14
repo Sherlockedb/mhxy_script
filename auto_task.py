@@ -25,6 +25,9 @@ class AutoTask(MhxyScript):
             task._flag = self._flag
             task.do()
 
+        print("全部任务已完成!")
+        clear_ui.do()
+
 
 if __name__ == '__main__':
     AutoTask.do()

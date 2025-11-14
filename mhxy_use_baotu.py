@@ -9,7 +9,7 @@ class UseBaotu(MhxyScript):
                 return baotuLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(17.3), winRelativeY(13))
-            pyautogui.dragTo(winRelativeX(17.3), winRelativeY(6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(17.3), winRelativeY(6), duration=0.8, button='left')
 
     def run_baotu(self):
         Util.leftClick(23, 16)

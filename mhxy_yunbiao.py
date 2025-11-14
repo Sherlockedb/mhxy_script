@@ -9,7 +9,7 @@ class Yunbiao(MhxyScript):
                 return yunbiaoLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
 
 
     def run_yunbiao(self):
@@ -20,7 +20,7 @@ class Yunbiao(MhxyScript):
         cooldown(2)
         if yunbiaoLocation is None:
             return False
-        pyautogui.leftClick(yunbiaoLocation.x + relativeX2Act(4), yunbiaoLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(yunbiaoLocation.x + relativeX2Act(3), yunbiaoLocation.y + relativeY2Act(0.3))
 
         yunbiaoDone = Util.locateOnScreen('resources/yunbiao/yunbiao_done.png')
         if yunbiaoDone is not None:
@@ -34,17 +34,17 @@ class Yunbiao(MhxyScript):
             return
         i = 0
         while self._flag:
-            yunbiaoLocation = Util.locateOnScreen('resources/yunbiao/putong_biaoyin.png')
+            yunbiaoLocation = Util.locateCenterOnScreen('resources/yunbiao/putong_biaoyin.png')
             if yunbiaoLocation is not None:
                 cooldown(0.5)
-                pyautogui.leftClick(yunbiaoLocation.left + yunbiaoLocation.width - 50,
-                                    yunbiaoLocation.top + yunbiaoLocation.height - 20)
+                pyautogui.leftClick(yunbiaoLocation.x,
+                                    yunbiaoLocation.y)
 
                 cooldown(0.5)
-                yunbiaoConfirm = Util.locateOnScreen('resources/yunbiao/yunbiao_confirm.png')
+                yunbiaoConfirm = Util.locateCenterOnScreen('resources/yunbiao/yunbiao_confirm.png')
                 if yunbiaoConfirm is not None:
-                    pyautogui.leftClick(yunbiaoConfirm.left + yunbiaoLocation.width - 50,
-                                        yunbiaoConfirm.top + yunbiaoLocation.height - 20)
+                    pyautogui.leftClick(yunbiaoConfirm.x,
+                                        yunbiaoConfirm.y)
                     print("运镖中 ", yunbiaoLocation)
                     i = 0
             cooldown(30)

@@ -9,7 +9,7 @@ class Baotu(MhxyScript):
                 return baotuLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
 
     def run_baotu(self, check_do=True):
         self.open_huodong()
@@ -22,7 +22,7 @@ class Baotu(MhxyScript):
         print(f"===== run baotu baotu location:{baotuLocation}")
         if baotuLocation is None:
             return False
-        pyautogui.leftClick(baotuLocation.x + relativeX2Act(4), baotuLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(baotuLocation.x + relativeX2Act(3), baotuLocation.y + relativeY2Act(0.3))
 
         baotuDone = Util.locateOnScreen('resources/baotu/baotu_done.png')
         print(f"===== run baotu baotu done location:{baotuDone}")
@@ -45,7 +45,8 @@ class Baotu(MhxyScript):
                 pyautogui.leftClick(dobaotu.left + dobaotu.width - 50,
                                     dobaotu.top + dobaotu.height - 20)
                 cooldown(1)
-                return self.run_baotu(check_do=False)
+                return True
+                # return self.run_baotu(check_do=False)
 
         return True
 

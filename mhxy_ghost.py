@@ -62,7 +62,7 @@ class Ghost(MhxyScript):
         i = 0
         while mission is None and i in range(0, 2):
             pyautogui.moveTo(winRelativeX(10), winRelativeY(12.5))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
             cooldown(1)
             mission = Util.locateCenterOnScreen(r'resources/ghost/mission.png')
             i += 1
@@ -120,7 +120,7 @@ class Ghost(MhxyScript):
         i = 0
         while tag is None and i in range(0, 1):
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
             cooldown(2)
             tag = Util.locateCenterOnScreen('resources/ghost/activity_tag.png')
             i += 1

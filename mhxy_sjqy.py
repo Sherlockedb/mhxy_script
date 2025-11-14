@@ -9,7 +9,7 @@ class Sjqy(MhxyScript):
                 return sjqyLocation
             cooldown(2)
             pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+            pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
 
 
     def run_sjqy(self):
@@ -21,7 +21,7 @@ class Sjqy(MhxyScript):
         print(f"===== run sjqy sjqy location:{sjqyLocation}")
         if sjqyLocation is None:
             return False
-        pyautogui.leftClick(sjqyLocation.x + relativeX2Act(4), sjqyLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(sjqyLocation.x + relativeX2Act(3), sjqyLocation.y + relativeY2Act(0.3))
 
         sjqyDone = Util.locateOnScreen('resources/sjqy/sjqy_done.png')
         print(f"===== run sjqy sjqy done location:{sjqyDone}")

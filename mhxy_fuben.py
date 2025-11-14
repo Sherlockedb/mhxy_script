@@ -91,7 +91,7 @@ class Fuben(MhxyScript):
             i = 0
             while lastFuben is None and i in range(0, 2):
                 pyautogui.moveTo(winRelativeX(10), winRelativeY(10))
-                pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8)
+                pyautogui.dragTo(winRelativeX(10), winRelativeY(4.6), duration=0.8, button='left')
                 cooldown(2)
                 lastFuben = Util.locateCenterOnScreen(self.config['lastFuben'])
                 i += 1
