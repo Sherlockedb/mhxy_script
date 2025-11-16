@@ -9,32 +9,17 @@ import pywinctl as pwc
 import pyautogui
 import pyperclip
 from pygetwindow import PyGetWindowException, BaseWindow
-# from pyautogui import Point
 from pyscreeze import Box, Point
 
-'''
-# ====== Monkey Patch =======
-import mss
-from PIL import Image
+from mhxy.get_all_windows import getWindowsWithTitleQuartz
+from mhxy.screenshot_quartz import screenshot_quartz
 
+# Monkey Patch
 _original_screenshot = pyautogui.screenshot
 
-def _mss_screenshot(imageFilename=None, region=None):
-    with mss.mss() as sct:
-        monitor = sct.monitors[0] if region is None else {
-            "left": region[0], "top": region[1],
-            "width": region[2], "height": region[3]
-        }
-        sct_img = sct.grab(monitor)
-        img = Image.frombytes("RGB", sct_img.size, sct_img.bgra, "raw", "BGRX")
-        if imageFilename:
-            img.save(imageFilename)
-        return img
-
-pyautogui.screenshot = _mss_screenshot
+pyautogui.screenshot = screenshot_quartz
 import pyscreeze
-pyscreeze.screenshot = _mss_screenshot
-'''
+pyscreeze.screenshot = screenshot_quartz
 
 logger = logging.getLogger('mylogger')
 logger.setLevel(logging.DEBUG)
@@ -318,8 +303,10 @@ def init(idx=0, resizeToSmall=False, changWinPos=True):
     def getFrameSize(idx) -> BaseWindow:
         window = None
         while window is None or window.left < 0:
-            windowsList = pwc.getWindowsWithTitle('梦幻西游')
+            # windowsList = pwc.getWindowsWithTitle('梦幻西游')
+            windowsList = getWindowsWithTitleQuartz('梦幻西游')
             # windowsList = pwc.getWindowsWithTitle('BlueStacks Air')
+            # windowsList = getWindowsWithTitleQuartz('BlueStacks')
             windowsList = list(filter(lambda x: x.left > 0, windowsList))
             windowsList.sort(key=lambda x: x.left)
 
