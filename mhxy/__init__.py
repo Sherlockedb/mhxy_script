@@ -212,32 +212,31 @@ class Util:
     @staticmethod
     def locateCenterOnScreen(pic, confidence=0.9):
         cfd = confidence if Util.__openCVEnable() else None
+        region=(frame.left, frame.top, frame.right-frame.left, frame.bottom-frame.top)
         if isinstance(pic, list):
             res = None
             for i in pic:
                 if cfd is not None:
-                    res = pyautogui.locateCenterOnScreen(i, region=(frame.left, frame.top, frame.right, frame.bottom),
-                                                         confidence=cfd)
+                    res = pyautogui.locateCenterOnScreen(i, region=region, confidence=cfd)
                 else:
-                    res = pyautogui.locateCenterOnScreen(i, region=(frame.left, frame.top, frame.right, frame.bottom))
+                    res = pyautogui.locateCenterOnScreen(i, region=region)
                 if res is not None:
                     return res
             return res
         else:
             if cfd is not None:
-                return pyautogui.locateCenterOnScreen(pic, region=(frame.left, frame.top, frame.right, frame.bottom),
-                                                      confidence=cfd)
+                return pyautogui.locateCenterOnScreen(pic, region=region, confidence=cfd)
             else:
-                return pyautogui.locateCenterOnScreen(pic,
-                                                      region=(frame.left, frame.top, frame.right, frame.bottom))
+                return pyautogui.locateCenterOnScreen(pic, region=region)
 
     @staticmethod
     def locateOnScreen(pic, confidence=0.9):
         cfd = confidence if Util.__openCVEnable() else None
+        region=(frame.left, frame.top, frame.right-frame.left, frame.bottom-frame.top)
         if cfd is not None:
-            return pyautogui.locateOnScreen(pic, region=(frame.left, frame.top, frame.right, frame.bottom), confidence=cfd)
+            return pyautogui.locateOnScreen(pic, region=region, confidence=cfd)
         else:
-            return pyautogui.locateOnScreen(pic, region=(frame.left, frame.top, frame.right, frame.bottom))
+            return pyautogui.locateOnScreen(pic, region=region)
 
     @staticmethod
     def leftClick(x, y):
