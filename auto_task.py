@@ -23,6 +23,7 @@ class AutoTask(MhxyScript):
             print("开始任务：", cls)
             task = cls()
             task._flag = self._flag
+            task.use_item()
             task.do()
             print("完成任务：", cls)
 

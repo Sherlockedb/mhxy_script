@@ -52,6 +52,13 @@ class Shimen(MhxyScript):
             return
         i = 0
         while self._flag:
+            jiuzhuanLocation = Util.locateOnScreen('resources/shimen/jiuzhuan.png')
+            if jiuzhuanLocation is not None:
+                closeLocation = Util.locateCenterOnScreen('resources/shimen/close_jiuzhuan.png')
+                if not closeLocation:
+                    return
+                pyautogui.leftClick(closeLocation.x, closeLocation.y)
+                cooldown(2)
             shimenLocation = Util.locateOnScreen('resources/shimen/shimen_finish.png')
             print(f"===== shimenLocation:{shimenLocation}")
             if shimenLocation is not None:
@@ -61,8 +68,6 @@ class Shimen(MhxyScript):
             if shimenTaskLocation2 is not None:
                 continueLocation = Util.locateCenterOnScreen('resources/shimen/shimen_continue_after.png');
                 if continueLocation is None:
-                    pyautogui.leftClick(shimenTaskLocation2.x, shimenTaskLocation2.y)
-                    cooldown(2)
                     pyautogui.leftClick(shimenTaskLocation2.x, shimenTaskLocation2.y)
             # shimenTaskLocation = Util.locateCenterOnScreen('resources/shimen/shimen_task.png')
             # if shimenTaskLocation is not None:

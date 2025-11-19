@@ -12,7 +12,11 @@ class UseBaotu(MhxyScript):
             pyautogui.dragTo(winRelativeX(17.3), winRelativeY(6), duration=0.8)
 
     def run_baotu(self):
-        Util.leftClick(23, 16)
+        bagLocation = Util.locateCenterOnScreen('resources/use_baotu/bag.png')
+        if not bagLocation:
+            return False
+        pyautogui.leftClick(bagLocation.x, bagLocation.y)
+        # Util.leftClick(23, 16)
         cooldown(0.5)
         baotuLocation = self.find_baotu()
         if baotuLocation is None:
@@ -27,11 +31,11 @@ class UseBaotu(MhxyScript):
             return
         i = 0
         while self._flag:
-            useBaotuLocation = Util.locateOnScreen('resources/use_baotu/use_baotu.png')
+            useBaotuLocation = Util.locateCenterOnScreen('resources/use_baotu/use_baotu.png')
             if useBaotuLocation is not None:
                 cooldown(0.5)
-                pyautogui.leftClick(useBaotuLocation.left + useBaotuLocation.width - 50,
-                                    useBaotuLocation.top + useBaotuLocation.height - 20)
+                pyautogui.leftClick(useBaotuLocation.x,
+                                    useBaotuLocation.y)
                 # print("挖宝图中 ", useBaotuLocation)
                 i = 0
             cooldown(2)

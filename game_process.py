@@ -9,8 +9,9 @@ class GameProcess:
 
     def __moveZhuomianbanFunc(self, size):
         windows = pyautogui.getAllWindows()
-        zhuomianban = (71, 963)
+        zhuomianban = (71, 1850)
         i = 0
+        cooldown(1)
         for item in list(filter(lambda x: x.title.startswith("MuMu模拟器12"), windows)):
             item.activate()
             print(item)

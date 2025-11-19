@@ -45,7 +45,7 @@ class Baotu(MhxyScript):
                 pyautogui.leftClick(dobaotu.left + dobaotu.width - 50,
                                     dobaotu.top + dobaotu.height - 20)
                 cooldown(1)
-                return self.run_baotu(check_do=False)
+                return True
 
         return True
 

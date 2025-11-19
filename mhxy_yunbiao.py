@@ -34,17 +34,17 @@ class Yunbiao(MhxyScript):
             return
         i = 0
         while self._flag:
-            yunbiaoLocation = Util.locateOnScreen('resources/yunbiao/putong_biaoyin.png')
+            yunbiaoLocation = Util.locateCenterOnScreen('resources/yunbiao/putong_biaoyin.png')
             if yunbiaoLocation is not None:
                 cooldown(0.5)
-                pyautogui.leftClick(yunbiaoLocation.left + yunbiaoLocation.width - 50,
-                                    yunbiaoLocation.top + yunbiaoLocation.height - 20)
+                pyautogui.leftClick(yunbiaoLocation.x,
+                                    yunbiaoLocation.y)
 
                 cooldown(0.5)
-                yunbiaoConfirm = Util.locateOnScreen('resources/yunbiao/yunbiao_confirm.png')
+                yunbiaoConfirm = Util.locateCenterOnScreen('resources/yunbiao/yunbiao_confirm.png')
                 if yunbiaoConfirm is not None:
-                    pyautogui.leftClick(yunbiaoConfirm.left + yunbiaoLocation.width - 50,
-                                        yunbiaoConfirm.top + yunbiaoLocation.height - 20)
+                    pyautogui.leftClick(yunbiaoConfirm.x,
+                                        yunbiaoConfirm.y)
                     print("运镖中 ", yunbiaoLocation)
                     i = 0
             cooldown(30)

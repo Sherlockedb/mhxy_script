@@ -21,7 +21,7 @@ class Mjxy(MhxyScript):
         print(f"===== run mjxy mjxy location:{mjxyLocation}")
         if mjxyLocation is None:
             return False
-        pyautogui.leftClick(mjxyLocation.x + relativeX2Act(4), mjxyLocation.y + relativeY2Act(0.3))
+        pyautogui.leftClick(mjxyLocation.x + relativeX2Act(4), mjxyLocation.y + relativeY2Act(0.6))
 
         mjxyDone = Util.locateOnScreen('resources/mjxy/mjxy_done.png')
         print(f"===== run mjxy mjxy done location:{mjxyDone}")
@@ -30,11 +30,10 @@ class Mjxy(MhxyScript):
 
         for _ in range(1, 10):
             cooldown(2)
-            mjxyOpt = Util.locateOnScreen('resources/mjxy/mjxy_opt.png')
+            mjxyOpt = Util.locateCenterOnScreen('resources/mjxy/mjxy_opt.png')
             print(f"===== run mjxyOpt check do location:{mjxyOpt}")
             if mjxyOpt is not None:
-                pyautogui.leftClick(mjxyOpt.left + mjxyOpt.width - 50,
-                                    mjxyOpt.top + mjxyOpt.height - 20)
+                pyautogui.leftClick(mjxyOpt.x, mjxyOpt.y)
                 cooldown(2)
 
                 mjxy_stage = Util.locateOnScreen('resources/mjxy/mjxy_stage.png')

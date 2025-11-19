@@ -29,7 +29,7 @@ class MyThread(threading.Thread):
 
 def myButton(root, text, width, command):
     return Button(root, text=text, width=width, bg='white', activebackground='grey', activeforeground='black',
-                  font=('微软雅黑', 8),
+                  font=('微软雅黑', 10),
                   command=command)
 
 
@@ -58,7 +58,7 @@ def packStop():
             _backgroundThread.stop()
         _backgroundThread = None
 
-    bangpaiBtn = myButton(root, text='停止当前任务', width=12, command=change2None)
+    bangpaiBtn = myButton(root, text='停止当前任务', width=20, command=change2None)
     bangpaiBtn.pack(side=BOTTOM, expand=NO)
 
 
@@ -66,37 +66,37 @@ def packGhost():
     def change2Ghost():
         changeThread(Ghost(changWinPos=_changWinPos))
 
-    ghostBtn = myButton(root, text='捉鬼', width=8, command=change2Ghost)
-    ghostBtn.place(x=40, y=60, anchor=NW)
+    ghostBtn = myButton(root, text='捉鬼', width=10, command=change2Ghost)
+    ghostBtn.place(x=40, y=80, anchor=NW)
 
 
 def packFuben():
     def change2Fuben():
         changeThread(Fuben(changWinPos=_changWinPos))
 
-    fubenBtn = myButton(root, text='副本', width=8, command=change2Fuben)
-    fubenBtn.place(x=130, y=60, anchor=NW)
+    fubenBtn = myButton(root, text='副本', width=10, command=change2Fuben)
+    fubenBtn.place(x=200, y=80, anchor=NW)
 
 def packMenpai():
     def changMission():
         changeThread(Menpai(changWinPos=_changWinPos))
 
-    fubenBtn = myButton(root, text='门派', width=8, command=changMission)
-    fubenBtn.place(x=40, y=100, anchor=NW)
+    fubenBtn = myButton(root, text='门派', width=10, command=changMission)
+    fubenBtn.place(x=40, y=150, anchor=NW)
 
 def packHaidi():
     def changMission():
         changeThread(Haidi(changWinPos=_changWinPos))
 
-    fubenBtn = myButton(root, text='海底', width=8, command=changMission)
-    fubenBtn.place(x=130, y=100, anchor=NW)
+    fubenBtn = myButton(root, text='海底', width=10, command=changMission)
+    fubenBtn.place(x=200, y=150, anchor=NW)
 
 def packMihunta():
     def changMission():
         changeThread(Mihunta(changWinPos=_changWinPos))
 
-    fubenBtn = myButton(root, text='迷魂塔', width=8, command=changMission)
-    fubenBtn.place(x=40, y=140, anchor=NW)
+    fubenBtn = myButton(root, text='迷魂塔', width=10, command=changMission)
+    fubenBtn.place(x=40, y=220, anchor=NW)
 
 
 def packBangpai():
@@ -106,43 +106,43 @@ def packBangpai():
         # changeThread(Bangpai(changWinPos=_changWinPos))
         changeThread(AutoBangpai())
 
-    bangpaiBtn = myButton(root, text='帮派任务', width=8, command=change2bangpai)
-    bangpaiBtn.place(x=130, y=140, anchor=NW)
+    bangpaiBtn = myButton(root, text='帮派任务', width=10, command=change2bangpai)
+    bangpaiBtn.place(x=200, y=220, anchor=NW)
 
 def packBaotu():
     def change2Baotu():
         changeThread(UseBaotu(changWinPos=_changWinPos))
 
-    mineBtn = myButton(root, text='一键挖宝图', width=8, command=change2Baotu)
-    mineBtn.place(x=40, y=230, anchor=NW)
+    mineBtn = myButton(root, text='一键挖宝图', width=10, command=change2Baotu)
+    mineBtn.place(x=40, y=360, anchor=NW)
 
 def packMine():
     def change2Mine():
         changeThread(Mine(changWinPos=_changWinPos))
 
-    mineBtn = myButton(root, text='挖矿', width=8, command=change2Mine)
-    mineBtn.place(x=130, y=230, anchor=NW)
+    mineBtn = myButton(root, text='挖矿', width=10, command=change2Mine)
+    mineBtn.place(x=200, y=360, anchor=NW)
 
 def packAutoTask():
     def change2AutoTask():
         changeThread(AutoTask())
 
-    mineBtn = myButton(root, text='日常任务', width=8, command=change2AutoTask)
-    mineBtn.place(x=40, y=270, anchor=NW)
+    mineBtn = myButton(root, text='日常任务', width=10, command=change2AutoTask)
+    mineBtn.place(x=40, y=450, anchor=NW)
 
 def packCheckLoaction():
     def change2CheckLocation():
         changeThread(CheckLoaction())
 
-    mineBtn = myButton(root, text='检查位置', width=8, command=change2CheckLocation)
-    mineBtn.place(x=130, y=270, anchor=NW)
+    mineBtn = myButton(root, text='检查位置', width=10, command=change2CheckLocation)
+    mineBtn.place(x=200, y=450, anchor=NW)
 
 def packAutoFight():
     def change2AutoFight():
         changeThread(AutoFight())
 
-    mineBtn = myButton(root, text='自动战斗', width=8, command=change2AutoFight)
-    mineBtn.place(x=40, y=310, anchor=NW)
+    mineBtn = myButton(root, text='自动战斗', width=10, command=change2AutoFight)
+    mineBtn.place(x=40, y=520, anchor=NW)
 
 # 界面程序 此部分封装了参数没有大量写死的程序 opencv 死活打包不进去
 # pyinstaller --onefile --noconsole mhxy_script.py
@@ -150,7 +150,7 @@ def packAutoFight():
 if __name__ == '__main__':
     root = Tk()
     root.title("mhxy_script")
-    root.geometry('260x540')
+    root.geometry('410x920')
     x = int((root.winfo_screenwidth() - root.winfo_reqwidth()) / 2)
     y = int((root.winfo_screenheight() - root.winfo_reqheight()) / 2)
     # 将窗口居中显示
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     # root.iconbitmap('mhxy.ico')
     gameProcess = GameProcess()
 
-    smallWinBtn = myButton(root, text='初始化为小窗口', width=12, command=gameProcess.moveZhuomianban)
+    smallWinBtn = myButton(root, text='初始化为小窗口', width=20, command=gameProcess.moveZhuomianban)
     smallWinBtn.place(x=80, y=10, anchor=NW)
 
     # 抓鬼
@@ -175,8 +175,8 @@ if __name__ == '__main__':
     packBangpai()
     # ================原始大小窗口
 
-    originWinBtn = myButton(root, text='初始化为原始窗口', width=12, command=gameProcess.moveZhuomianban2Origin)
-    originWinBtn.place(x=80, y=180, anchor=NW)
+    originWinBtn = myButton(root, text='初始化为原始窗口', width=20, command=gameProcess.moveZhuomianban2Origin)
+    originWinBtn.place(x=80, y=290, anchor=NW)
 
     # 一键挖宝图
     packBaotu()
@@ -200,7 +200,7 @@ if __name__ == '__main__':
                   "2 程序不受控可以通过将鼠标快速移动到右上角强制终止。\n"
                   "3 对应功能程序配置文件和说明放在resources下相应文件夹内\n"
              )
-    t.place(x=10, y=360, anchor=NW)
+    t.place(x=20, y=590, anchor=NW)
 
     packStop()
     root.mainloop()

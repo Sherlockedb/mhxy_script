@@ -36,14 +36,14 @@ class Frame:
 frame = Frame(0, 0)
 
 # 窗口固定大小
-originSize = [1040, 807]
-smallSize = (907, 707)
+originSize = [1755, 1405]
+smallSize = (1755, 1405)
 # 鼠标到变化态需要向做微调距离
-resizeOffset = (6, 4)
+resizeOffset = (3, 5)
 frameSize = [0, 0]
 
-frameOriginSizeCm = [28.1, 21.8]
-frameSizeCm = [28.1, 21.8]
+frameOriginSizeCm = [27, 21.7]
+frameSizeCm = [27, 21.7]
 
 def relativeSize(x, y):
     return (frameSize[0] * x / frameSizeCm[0],
@@ -393,47 +393,54 @@ class MhxyScript:
     def do(self):
         pass
 
-    def _open_huodong(self):
-        huodongLocation = Util.locateCenterOnScreen('resources/common/huodong.png')
-        print(f"===== _open_huodong:{huodongLocation}")
+    def _click_icon(self, icon_path):
+        huodongLocation = Util.locateCenterOnScreen(icon_path)
         if huodongLocation is not None:
             pyautogui.leftClick(huodongLocation.x, huodongLocation.y)
+            return True
 
     def open_huodong(self, n=10):
         for _ in range(0, n):
             if not self._flag:
                 return
+            # Util.leftClick(10, 10)
             # pyautogui.hotkey('alt', 'c')
-            Util.leftClick(7.5, 1.5)
+            if self._click_icon('resources/common/rectangle.png'):
+                cooldown(2)
+            self._click_icon('resources/common/huodong.png')
             cooldown(2)
-            baotuLocation = Util.locateCenterOnScreen('resources/common/activity.png')
-            print(f"===== open_huodong:{baotuLocation}")
-            if baotuLocation is not None:
-                Util.leftClick(3, 6.3)
+            actLocation = Util.locateCenterOnScreen('resources/common/activity.png')
+            print(f"===== open_huodong:{actLocation}")
+            if actLocation is not None:
+                Util.leftClick(5, 8)
                 cooldown(1)
-                Util.leftClick(3, 4.5)
+                Util.leftClick(5, 6.5)
                 return True
+            cooldown(2)
 
         return False
     
     _item_black_list = ['resources/common/shengjing_key.png',
                         'resources/common/xingchen_suipian.png',
                         'resources/common/jingcaiquan.png',
+                        'resources/common/qiyiquan.png',
+                        'resources/common/shanggufuzhou.png',
                         ]
 
     def _check_black_item(self):
         for item in self._item_black_list:
             itemLocation = Util.locateCenterOnScreen(item)
-            if itemLocation is None:
+            if not itemLocation:
                 continue
-
             closeLocation = Util.locateCenterOnScreen('resources/common/close_item.png')
+            if not closeLocation:
+                continue
             print(f"===== close_black_item:{closeLocation}")
             pyautogui.leftClick(closeLocation.x, closeLocation.y)
             cooldown(1)
 
     def use_item(self):
-        for _ in range(0, 5):
+        for _ in range(0, 10):
             self._check_black_item()
             itemLocation = Util.locateCenterOnScreen('resources/common/use_item.png')
             if itemLocation is None:
